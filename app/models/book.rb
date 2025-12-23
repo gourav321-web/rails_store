@@ -1,3 +1,3 @@
 class Book < ApplicationRecord
-	belongs_to :author , dependent: :destroy
+	belongs_to :author ,counter_cache: true
 end

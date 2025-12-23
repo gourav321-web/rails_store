@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+  get 'books/index', to: "books#index"
+  get 'books/show/:id',  to: "books#show"
+  post 'books/create',to: "books#create"
+  put 'books/update/:id', to:"books#update"
+  delete 'books/delete/:id',to:"books#delete"
+
+  get 'authors/index',   to: "authors#index"
+  get 'authors/show/:id',to: "authors#show"
+  post 'authors/create',  to: "authors#create"
+  put  'authors/update/:id', to: "authors#update"
+  delete 'authors/delete/:id', to: "authors#delete"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
