@@ -1,3 +1,4 @@
+require "prawn"
 class AuthorsController < ApplicationController
 
   skip_forgery_protection only: [:create, :update]
@@ -9,7 +10,11 @@ class AuthorsController < ApplicationController
 
   def show
     @author = Author.find(params[:id])
-    render json: @author, status: :ok
+    # render json: @author, status: :ok
+    respond_to do |format|
+      format.html
+      format.pdf { render pdf: generate_pdf(@author) }
+    end
   end
 
   def create
@@ -34,5 +39,13 @@ class AuthorsController < ApplicationController
 
   def create_author
     params.require(:author).permit(:name)
+  end
+
+  def generate_pdf(client)
+      Prawn::Document.new do
+        text client.name, align: :center
+        # text "Address: #{client.address}"
+        # text "Email: #{client.email}"
+      end.render
   end
 end
